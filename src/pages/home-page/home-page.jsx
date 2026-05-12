@@ -48,6 +48,139 @@ export const HomePage = () => {
     return () => window.cancelAnimationFrame(frameId);
   }, []);
 
+  useEffect(() => {
+    const shouldAutoScroll = sessionStorage.getItem("wedding-auto-scroll") === "true";
+    if (!shouldAutoScroll) return undefined;
+
+    sessionStorage.removeItem("wedding-auto-scroll");
+    window.scrollTo({ top: 0, behavior: "auto" });
+
+    let frameId;
+    let startTime;
+    let elapsedBeforePause = 0;
+    const duration = 32000;
+    let paused = false;
+    let finished = false;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchMoved = false;
+    let lastTouchToggleAt = 0;
+
+    const getMaxScroll = () => Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+    const getProgressFromScroll = () => {
+      const currentMaxScroll = getMaxScroll();
+      if (currentMaxScroll <= 0) return 0;
+      return Math.min(window.scrollY / currentMaxScroll, 1);
+    };
+    const isIgnoredTarget = (target) =>
+      target instanceof Element &&
+      Boolean(
+        target.closest("button, a, input, textarea, select, label, iframe, [data-autoscroll-ignore]")
+      );
+
+    if (getMaxScroll() <= 0) return undefined;
+
+    const stopAutoScroll = () => {
+      if (paused || finished) return;
+      paused = true;
+      if (frameId) window.cancelAnimationFrame(frameId);
+    };
+
+    const resumeAutoScroll = () => {
+      if (!paused || finished) return;
+      elapsedBeforePause = getProgressFromScroll() * duration;
+      paused = false;
+      startTime = undefined;
+      frameId = window.requestAnimationFrame(step);
+    };
+
+    const pauseAutoScroll = () => {
+      if (paused || finished) return;
+      if (startTime) {
+        elapsedBeforePause += performance.now() - startTime;
+        startTime = undefined;
+      }
+      stopAutoScroll();
+    };
+
+    const toggleAutoScroll = () => {
+      if (finished) return;
+
+      if (paused) {
+        resumeAutoScroll();
+        return;
+      }
+
+      pauseAutoScroll();
+    };
+
+    const step = (timestamp) => {
+      if (paused || finished) return;
+      if (!startTime) startTime = timestamp;
+      const elapsed = elapsedBeforePause + (timestamp - startTime);
+      const progress = Math.min(elapsed / duration, 1);
+      window.scrollTo(0, getMaxScroll() * progress);
+
+      if (progress < 1) {
+        frameId = window.requestAnimationFrame(step);
+      } else {
+        finished = true;
+      }
+    };
+
+    const handleTouchStart = (event) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      touchMoved = false;
+    };
+
+    const handleTouchMove = (event) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+
+      const deltaX = Math.abs(touch.clientX - touchStartX);
+      const deltaY = Math.abs(touch.clientY - touchStartY);
+
+      if (deltaX > 12 || deltaY > 12) {
+        touchMoved = true;
+        pauseAutoScroll();
+      }
+    };
+
+    const handleTouchEnd = (event) => {
+      if (touchMoved) return;
+      if (isIgnoredTarget(event.target)) return;
+      lastTouchToggleAt = Date.now();
+      toggleAutoScroll();
+    };
+
+    const handleClick = (event) => {
+      if (Date.now() - lastTouchToggleAt < 500) return;
+      if (isIgnoredTarget(event.target)) return;
+      toggleAutoScroll();
+    };
+
+    window.addEventListener("wheel", pauseAutoScroll, { passive: true });
+    window.addEventListener("click", handleClick);
+    window.addEventListener("keydown", pauseAutoScroll);
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
+
+    frameId = window.requestAnimationFrame(step);
+    return () => {
+      if (frameId) window.cancelAnimationFrame(frameId);
+      window.removeEventListener("wheel", pauseAutoScroll);
+      window.removeEventListener("click", handleClick);
+      window.removeEventListener("keydown", pauseAutoScroll);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, []);
+
   const handleOpenGallery = (index) => {
     setGalleryIndex(index);
     setGalleryOpen(true);

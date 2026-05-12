@@ -19,6 +19,7 @@ export const CoverPage = () => {
   const handleOpenInvitation = () => {
     sessionStorage.setItem("wedding-music-autoplay", "true");
     sessionStorage.setItem("wedding-music-visible", "true");
+    sessionStorage.setItem("wedding-auto-scroll", "true");
     setIsOpening(true);
   };
 

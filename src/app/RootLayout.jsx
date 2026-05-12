@@ -74,6 +74,7 @@ export function RootLayout() {
         <button
           type="button"
           onClick={toggleMusic}
+          data-autoscroll-ignore="true"
           aria-label={isPlaying ? "Tắt nhạc" : "Bật nhạc"}
           className="fixed bottom-5 right-5 z-[100] flex h-14 w-14 items-center justify-center rounded-full border border-[#fff0e7]/70 bg-[#710001] text-[#fff0e7] shadow-[0_14px_30px_rgba(113,0,1,0.35)] transition hover:scale-105 active:scale-95 md:bottom-8 md:right-8 md:h-16 md:w-16"
         >
