@@ -226,6 +226,7 @@ export const CoverPage = () => {
                     initial={{ opacity: 0, letterSpacing: "0.4em" }}
                     animate={{ opacity: 1, letterSpacing: "0.06em" }}
                     transition={{ delay: 0.7, duration: 1 }}
+                    className="font-bold"
                   >
                     Anh Tuấn
                   </motion.div>
@@ -236,6 +237,7 @@ export const CoverPage = () => {
                     initial={{ opacity: 0, letterSpacing: "0.4em" }}
                     animate={{ opacity: 1, letterSpacing: "0.06em" }}
                     transition={{ delay: 1, duration: 1 }}
+                    className="font-bold" 
                   >
                     Ngọc Nhi
                   </motion.div>

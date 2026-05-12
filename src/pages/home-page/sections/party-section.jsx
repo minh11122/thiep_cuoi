@@ -1,4 +1,4 @@
-import { SectionTitle } from "@/components/invitation";
+import { RevealBlock, SectionTitle } from "@/components/invitation";
 import flowerImage from "@/assets/HOA.webp";
 import phoenixImage from "@/assets/Phuong.webp";
 import { RsvpModal } from "../components";
@@ -43,7 +43,7 @@ export const PartySection = ({
         "
       />
 
-      <div className="relative z-10 mx-auto max-w-3xl text-center">
+      <RevealBlock className="relative z-10 mx-auto max-w-3xl text-center">
 
         <SectionTitle>
           TIỆC CƯỚI SẼ DIỄN RA VÀO LÚC:
@@ -298,7 +298,7 @@ export const PartySection = ({
         >
           XÁC NHẬN THAM DỰ
         </button>
-      </div>
+      </RevealBlock>
     </section>
   );
 };

@@ -1,4 +1,4 @@
-import { SectionTitle } from "@/components/invitation";
+import { RevealBlock, SectionTitle } from "@/components/invitation";
 import { GalleryModal } from "../components";
 
 export const AlbumSection = ({
@@ -26,7 +26,7 @@ export const AlbumSection = ({
         onPrev={onPrevGallery}
       />
 
-      <div className="group relative">
+      <RevealBlock className="group relative" delay={0.08}>
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#fff7f1] to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#fff7f1] to-transparent" />
         <div
@@ -66,13 +66,15 @@ export const AlbumSection = ({
             </button>
           ))}
         </div>
-      </div>
+      </RevealBlock>
 
+      <RevealBlock delay={0.12}>
       <p className="mt-5 text-center text-sm italic text-[#8f5757]">
         Album đang tự chuyển động ngang. Chạm hoặc rê chuột để tạm dừng.
       </p>
+      </RevealBlock>
 
-      <div className="mt-8 text-center">
+      <RevealBlock className="mt-8 text-center" delay={0.16}>
         <button
           onClick={() => onOpenGallery(0)}
           className="inline-flex items-center gap-2 rounded-full border-2 border-[#710001] px-6 py-2 text-[#710001] transition-all hover:bg-[#710001] hover:text-white"
@@ -82,7 +84,7 @@ export const AlbumSection = ({
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
-      </div>
+      </RevealBlock>
     </section>
   );
 };

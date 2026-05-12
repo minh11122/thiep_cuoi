@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { SectionTitle } from "@/components/invitation";
+import { RevealBlock, SectionTitle } from "@/components/invitation";
 
 export const GuestbookSection = () => {
   return (
     <section className="relative overflow-hidden px-6 py-12 md:px-10">
       <SectionTitle>Sổ Lưu Bút</SectionTitle>
 
-      <div className="mx-auto mt-8 max-w-2xl">
+      <RevealBlock className="mx-auto mt-8 max-w-2xl" delay={0.08}>
         {/* Input */}
         <input
           className="w-full rounded-2xl border border-[#710001]/40 bg-white/40 px-5 py-4 text-[#710001] outline-none backdrop-blur-sm placeholder:text-[#b07b7b] focus:border-[#710001]"
@@ -51,7 +51,7 @@ export const GuestbookSection = () => {
         >
           Chưa có lời chúc nào. Hãy là người đầu tiên!
         </motion.p>
-      </div>
+      </RevealBlock>
     </section>
   );
 };

@@ -4,9 +4,13 @@ export const InvitationGlobalStyles = () => {
       * {
         scrollbar-width: none;
         -ms-overflow-style: none;
+        font-family: "Times New Roman", Times, serif;
       }
       *::-webkit-scrollbar {
         display: none;
+      }
+      input, textarea, select, button {
+        font: inherit;
       }
 
       @keyframes floatUp {
@@ -38,6 +42,15 @@ export const InvitationGlobalStyles = () => {
         from { opacity: 0; }
         to { opacity: 1; }
       }
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.15; transform: scale(0.9); }
+        50% { opacity: 0.7; transform: scale(1.15); }
+      }
+      @keyframes driftPetal {
+        0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
+        15% { opacity: 0.7; }
+        100% { transform: translate3d(40px, 120px, 0) rotate(18deg); opacity: 0; }
+      }
       @keyframes scaleUp {
         from { opacity: 0; transform: scale(0.95); }
         to { opacity: 1; transform: scale(1); }
@@ -49,7 +62,9 @@ export const InvitationGlobalStyles = () => {
       .animate-floatRight { animation: floatRight 7s ease-in-out infinite; }
       .animate-fadeIn { animation: fadeIn 0.2s ease-out; }
       .animate-scaleUp { animation: scaleUp 0.25s ease-out; }
-      .serif-font { font-family: 'Cormorant Garamond', 'Times New Roman', serif; }
+      .animate-twinkle { animation: twinkle 3.2s ease-in-out infinite; }
+      .animate-driftPetal { animation: driftPetal 7s ease-in-out infinite; }
+      .serif-font { font-family: "Times New Roman", Times, serif; }
 
       
     `}</style>

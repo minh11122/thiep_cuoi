@@ -1,4 +1,4 @@
-import { SectionTitle } from "@/components/invitation";
+import { RevealBlock, SectionTitle } from "@/components/invitation";
 import phoenixImage from "@/assets/Phuong.webp";
 import flowerImage from "@/assets/HOA.webp";
 import { familyCards } from "../data";
@@ -83,7 +83,7 @@ export const FamilySection = () => {
         "
       />
 
-      <div className="relative z-10 mx-auto max-w-4xl text-center">
+      <RevealBlock className="relative z-10 mx-auto max-w-4xl text-center">
 
         {/* title */}
         <SectionTitle>
@@ -240,7 +240,7 @@ export const FamilySection = () => {
         >
           (Tức ngày 28/04 năm Bính Ngọ)
         </p>
-      </div>
+      </RevealBlock>
     </section>
   );
 };
