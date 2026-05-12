@@ -1,23 +1,53 @@
+import { motion } from "framer-motion";
 import { SectionTitle } from "@/components/invitation";
 import { timeline } from "../data";
 
 export const TimelineSection = () => {
   return (
-    <section className="bg-white/30 px-6 py-14 md:px-10">
+    <section className="relative overflow-hidden px-6 py-12 md:px-10">
       <SectionTitle>Lịch Trình Ngày Cưới</SectionTitle>
-      <div className="mx-auto max-w-3xl rounded-3xl border border-[#710001]/10 bg-white/80 p-6 shadow-md">
-        {timeline.map((item, index) => (
-          <div key={item.time} className="group flex items-start gap-5 py-2">
-            <div className="w-24 text-right text-sm font-bold text-[#710001] md:text-base">{item.time}</div>
-            <div className="relative flex flex-col items-center">
-              <div className="z-10 mt-2 h-3 w-3 rounded-full bg-[#710001] ring-4 ring-[#f3d5c8]" />
-              {index < timeline.length - 1 && <div className="absolute top-6 h-16 w-0.5 bg-[#710001]/20" />}
-            </div>
-            <div className="flex-1 py-1 text-sm font-medium text-[#710001] transition group-hover:translate-x-1 md:text-base">
-              {item.title}
-            </div>
-          </div>
-        ))}
+
+      <div className="relative mx-auto mt-8 max-w-xl">
+        {/* Line */}
+        <div className="absolute left-1/2 top-0 h-full w-[2px] -translate-x-1/2 bg-[#710001]/25" />
+
+        <div className="space-y-6">
+          {timeline.map((item, index) => (
+            <motion.div
+              key={item.time}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.35,
+                delay: index * 0.08,
+              }}
+              viewport={{ once: true }}
+              className="relative flex items-center justify-center"
+            >
+              {/* Time */}
+              <div className="w-1/2 pr-5 text-right">
+                <p className="text-lg font-semibold text-[#710001] md:text-xl">
+                  {item.time}
+                </p>
+              </div>
+
+              {/* Dot */}
+              <div className="relative z-10 flex h-4 w-4 items-center justify-center rounded-full bg-[#710001] shadow">
+                <div className="h-1.5 w-1.5 rounded-full bg-white" />
+              </div>
+
+              {/* Title */}
+              <motion.div
+                whileHover={{ x: 2 }}
+                className="w-1/2 pl-5"
+              >
+                <p className="text-sm font-medium text-[#710001] md:text-base">
+                  {item.title}
+                </p>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -14,7 +14,7 @@ export const AlbumSection = ({
   onOpenGallery,
 }) => {
   return (
-    <section className="overflow-hidden bg-white/40 px-6 py-14 md:px-10">
+    <section className="overflow-hidden px-6 py-14 md:px-10">
       <SectionTitle>Album Ảnh Cưới</SectionTitle>
 
       <GalleryModal

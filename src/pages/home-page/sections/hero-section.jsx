@@ -3,7 +3,7 @@ import phoenixRightImage from "@/assets/Phuong.webp";
 
 export const HeroSection = () => {
   return (
-    <section className="relative overflow-hidden bg-[#f8f3ec] px-4 pb-16 pt-8 text-center md:min-h-screen md:px-6 md:pt-16">
+    <section className="relative overflow-visible px-4 pb-16 pt-8 text-center md:min-h-screen md:px-6 md:pt-16">
 
       {/* Chữ hỷ */}
       <div className="relative z-10 flex justify-center">
@@ -29,13 +29,13 @@ export const HeroSection = () => {
         src={phoenixRightImage}
         alt=""
         className="
-          pointer-events-none absolute
+          pointer-events-none absolute z-30
           -left-14 top-[55px]
           w-[185px]
           opacity-95
           drop-shadow-xl
 
-          md:-left-24 md:top-[60px]
+          md:-left-24 md:top-[160px]
           md:w-[430px]
 
           animate-floatLeft
@@ -47,13 +47,13 @@ export const HeroSection = () => {
         src={phoenixRightImage}
         alt=""
         className="
-          pointer-events-none absolute
+          pointer-events-none absolute z-30
           -right-14 top-[55px]
           w-[185px]
           opacity-95
           drop-shadow-xl
 
-          md:-right-24 md:top-[60px]
+          md:-right-24 md:top-[160px]
           md:w-[430px]
 
           animate-floatRight

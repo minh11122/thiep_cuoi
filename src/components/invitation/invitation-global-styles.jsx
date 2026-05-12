@@ -50,6 +50,8 @@ export const InvitationGlobalStyles = () => {
       .animate-fadeIn { animation: fadeIn 0.2s ease-out; }
       .animate-scaleUp { animation: scaleUp 0.25s ease-out; }
       .serif-font { font-family: 'Cormorant Garamond', 'Times New Roman', serif; }
+
+      
     `}</style>
   );
 };
